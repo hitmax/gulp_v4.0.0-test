@@ -1,0 +1,1 @@
+function o(o,l){return o*l}console.log(o(2,3)),console.log(o(4,3)),console.log(o(5,9));
