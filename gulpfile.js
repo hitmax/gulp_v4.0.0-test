@@ -7,6 +7,7 @@ const del = require('del');
 const browserSync = require('browser-sync').create();
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
+const tinypng = require('gulp-tinypng');
 
 // const cssFiles =[
 //     './src/css/**/main.css',
@@ -51,6 +52,16 @@ function clean() {
     return del(['build/*'])
 }
 
+function tinyPNG() {
+    return gulp.src('./src/img/*.*')
+        .pipe(tinypng('Xbyf2PhMWBEf3WXxIAvaFbQ2wFxx1aPK'))
+        .pipe(gulp.dest('./build/img'));
+}
+function tinyPNGWatch() {
+    return gulp.src('./src/img/*.*')
+        .pipe(gulp.dest('./build/img'));
+}
+
 function watch(){
     browserSync.init({
         server: {
@@ -62,13 +73,16 @@ function watch(){
     //gulp.watch('./src/css/**/*.css', styles);
     gulp.watch('./src/sass/**/*.scss', styles);
     gulp.watch('./src/js/**/*.js', scripts);
+    gulp.watch('./src/img/**/*.*', tinyPNGWatch);
     gulp.watch("./*.html").on('change', browserSync.reload);
 }
 
 gulp.task('styles', styles);
 gulp.task('scripts', scripts);
 gulp.task('del', clean);
+gulp.task('tinyPNGWatch', tinyPNGWatch);            //just copy images!
 gulp.task('watch', watch);
-gulp.task('build', gulp.series(clean, gulp.parallel(styles, scripts)));
-gulp.task('dev', gulp.series('build', 'watch'));
+gulp.task('build', gulp.series(clean, gulp.parallel(styles, scripts, tinyPNGWatch)));
 
+gulp.task('dev', gulp.series('build', 'watch'));
+gulp.task('tinyPNG', tinyPNG);                      //single usage, tinify images!!!

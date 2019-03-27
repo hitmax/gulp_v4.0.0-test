@@ -1,1 +1,1 @@
-{"version":3,"sources":["media.scss"],"names":[],"mappings":"AAAA,GACE,MAAA","file":"style.css","sourcesContent":["h1 {\r\n  color: pink;\r\n}"]}
+{"version":3,"sources":["media.scss","main.scss"],"names":[],"mappings":"AAAA,GCIE,UAAA,KDHA,MAAA","file":"style.css","sourcesContent":["h1 {\r\n  color: pink;\r\n}","@import 'media';\r\n\r\nh1 {\r\n  color: orange;\r\n  font-size: 24px;\r\n}\r\n\r\n"]}
